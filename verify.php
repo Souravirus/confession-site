@@ -122,7 +122,8 @@ Confession Verification page
         
         else
         {
-            echo "<center>Sorry sending failed<br></center>";
+            echo "<center>Sorry sending failed<br>
+            Please do not use <b>'</b> in your messge, It is for secutiry of our server & databases.</center>";
         }
     }
     else
