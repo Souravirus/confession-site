@@ -69,6 +69,10 @@ $db=mysqli_connect(HOST, USER, PASSWORD, DATABASE)
     top: 5px;
     z-index: 2147483;
 }
+#direction {
+     margin-bottom:3%;   
+     text-align: center;
+}
     </style>
     
 
