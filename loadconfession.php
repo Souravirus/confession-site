@@ -25,7 +25,7 @@
                             Admin - <?php echo htmlspecialchars_decode(stripslashes($row['cmnt'])); ?>
                             </div></div>
                             <div class="panel-footer">
-                                <div class="fb-like" data-href="http://exe.nith.ac.in/confess/#like<?php echo $id; ?>" id="like<?php echo $id;?>" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+                                <div class="fb-like" data-href="http://exe.nith.ac.in/confess/#like<?php echo $id; ?>" id="<?php echo $id;?>" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
                                 <div class="fb-comments" id="<?php echo $id;?>" data-href="http://exe.nith.ac.in/confess/#<?php echo $id; ?>" data-width="100%" data-numposts="100"></div>
                             </div>
                         </div>
