@@ -25,7 +25,7 @@
         <footer id="footer">
             <div class="container">
                 <div class="col-md-8">
-                    <p class="copyright">&copy;: <span>2017</span> | Designed, Developed & Hosted by <b><a href="index.php" title="Team EXE official website">Team .EXE</a></b></p>
+                    <p class="copyright">&copy;: <span>2017</span> | Designed, Developed & Hosted with <b><a href="index.php" title="Team EXE official website">&#x2661; - Team .EXE</a></b></p>
                 </div>
             </div>
         </footer> <!-- /#footer -->
