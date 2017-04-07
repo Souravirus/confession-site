@@ -37,6 +37,14 @@
             });
         </script>
     <title>Confess here - Team .EXE</title>
+    <style type="text/css">
+.demo-card {
+  padding-top: 20px;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 10px;
+}
+</style>
 
 <?php 
       include_once('stylesheets.php');
@@ -44,6 +52,7 @@
       include_once('header.php');
 ?>
     <body>
+    <div class="demo-card">
     <div class="page-header">
   <h1>Confess here <small> - Team .EXE</small></h1>
   NOTE - Use * when mentioning someone's name.<br>Please be sensible towards feelings of others and don't post abusive things.  Posting such things can result in increased security for the website and monitoring of confessors IP.
@@ -62,6 +71,7 @@
 
                 <input type="submit" class="btn btn-info" id="submission" value="Submit" name="submit">
             </form>
+        </div>
         </div>
         <?php
     include_once('footer.php');
