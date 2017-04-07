@@ -72,9 +72,12 @@
 <h1>NITH Confessions<small> - Team .EXE</small></h1>
 Reported Confessions verification page
 </div>
-
-
+<center>
+<p>Due to some peoples mischievous activities, we're turning off our reporting feature temporarily<br> It'll soon be updated</p>
+<p>Till then keep confessing</p>
+</center>
 <?php
+/*
   require_once('recaptchalib.php');
     include_once 'includes/sql_config.php';
     include_once 'secret.php';
@@ -110,6 +113,7 @@ die ("<center>The reCAPTCHA wasn't entered correctly. Go back and try it again."
             if(isset($_POST['submit']))
             header( "refresh:6;url=index.php" );
   }
+*/
   ?>
 </center>
 </body>
