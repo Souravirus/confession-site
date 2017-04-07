@@ -46,7 +46,7 @@
     <body>
     <div class="page-header">
   <h1>Confess here <small> - Team .EXE</small></h1>
-  NOTE - Please be sensible towards feelings of others and don't post abusive things.  Posting such things can result in increased security for the website and monitoring of confessors IP.
+  NOTE - Use * when mentioning someone's name.<br>Please be sensible towards feelings of others and don't post abusive things.  Posting such things can result in increased security for the website and monitoring of confessors IP.
 </div>
         <div id="main1"> 
             <form role="form" action="verify.php" method="post" >
