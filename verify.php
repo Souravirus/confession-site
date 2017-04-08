@@ -81,7 +81,7 @@ Confession Verification page
   //get the time of the confessions
   //$da=date("d/m/Y");
   $date = date_create();
-  date_format($date, 'd/m/Y - H:i:s');
+  echo date_format($date, 'd/m/Y - H:i:s');
   $cmt="Admin comment coming soon.";
 
   function test_input($data) 
