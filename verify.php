@@ -114,7 +114,7 @@ Confession Verification page
 
     if($message)
     {
-        $sql="INSERT INTO adminperm (message, cmnt, dat, permission) values ('$message','$cmt','$da',1)";
+        $sql="INSERT INTO adminperm (message, cmnt, dat, permission) values ('$message','$cmt',now(),1)";
         if(mysqli_query($db,$sql))
         {
             echo '<center><h2>Thanks for posting confession.</h2>';
