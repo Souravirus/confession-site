@@ -33,7 +33,7 @@
                     <div class="demo-card">
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                    <h3 class="panel-title">Confession #<?php echo $row['id'];?><span style="float: right"><?php echo $row['dat'];?></span></h3>
+                                    <h3 class="panel-title">#<?php echo $row['id'];?><span style="float: right"><?php echo $row['dat'];?></span></h3>
                             </div>
                             <div class="panel-body">
                                 <?php echo htmlspecialchars_decode(stripslashes($row['message'])); ?>
