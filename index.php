@@ -1,7 +1,7 @@
 <?php
-    include_once 'includes/sql_config.php';
-$db=mysqli_connect(HOST, USER, PASSWORD, DATABASE)
-              or die('Error connecting to database');
+  require_once('secret.php');
+  $db=mysqli_connect($host, $username, $password, $database)  
+  or die('Error connecting to database');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +17,7 @@ $db=mysqli_connect(HOST, USER, PASSWORD, DATABASE)
     <meta property="og:url" content="http://exe.nith.ac.in/confess"/>
     <meta property="og:site_name" content="NITH Confession site by - Team .EXE"/>
 
-    <title>Confession - Team .EXE</title>
+    <title>Anonymous Confessions</title>
     <style type="text/css">
 .demo-card {
   padding-top: 20px;
@@ -112,7 +112,7 @@ $('#return-to-top').click(function() {      // When arrow is clicked
     </script>
 <center>
 <div id="topp" class="page-header">
-<h1>NITH Confessions<small> - Team .EXE</small></h1>
+<h1>Anonymous Confessions</h1>
 </div>
 </center>
 

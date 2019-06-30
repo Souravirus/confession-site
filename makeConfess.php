@@ -7,6 +7,7 @@
     <meta name="author" content="Team .EXE">
     <link rel="icon" href="exe.nith.ac.in/images/confess.png">
     <link rel="stylesheet" href="css/makeconfess.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script type="text/javascript" src="tinymce/tinymce.min.js"></script>
     <script>
              tinymce.init({
@@ -36,45 +37,42 @@
                 plugin_preview_width: 250
             });
         </script>
-    <title>Confess here - Team .EXE</title>
+    <title>Confess here</title>
     <style type="text/css">
-.demo-card {
-  padding-top: 20px;
-  padding-left: 5%;
-  padding-right: 5%;
-  padding-bottom: 10px;
-}
-</style>
-
+      .demo-card {
+        padding-top: 20px;
+        padding-left: 5%;
+        padding-right: 5%;
+        padding-bottom: 10px;
+      }
+    </style>
+  
+  </head>
 <?php 
       include_once('stylesheets.php');
-      echo "</head><body>";
       include_once('header.php');
+      require_once('recaptcha_keys.php');
 ?>
     <body>
-    <div class="demo-card">
-    <div class="page-header">
-  <h1>Confess here <small> - Team .EXE</small></h1>
-  NOTE - Use * when mentioning someone's name.<br>Please be sensible towards feelings of others and don't post abusive things.  Posting such things can result in increased security for the website and monitoring of confessors IP.
-</div>
-        <div id="main1"> 
-            <form role="form" action="verify.php" method="post" >
-                <div class="input">
-                    <textarea class="inpf" name="confmsg" rows="10" cols="10">
-                    </textarea>
-                </div>
-                <?php
-                      require_once('recaptchalib.php');
-                      $publickey = "6LfUPRsUAAAAAGgzv96APuiXYvUtxkHoUKs4pki7"; // you got this from the signup page
-                      echo recaptcha_get_html($publickey);
-                ?>
-
-                <input type="submit" class="btn btn-info" id="submission" value="Submit" name="submit">
-            </form>
-        </div>
-        </div>
+      <div class="demo-card">
+      <div class="page-header">
+        <h1>Confess here</h1>
+          </div>
+            <div id="main1"> 
+                <form action="verify.php" method="POST" >
+                    <div class="input">
+                        <textarea class="inpf" name="confmsg" rows="10" cols="10">
+                        </textarea>
+                    </div>
+                    <div class="g-recaptcha" data-sitekey=<?php echo $site_key;?>></div>
+                    <br/>
+                    <input type="submit" class="btn btn-info" id="submission" value="Submit" name="submit">
+                </form>
+            </div>
+          </div>
         <?php
     include_once('footer.php');
 ?>
+
     </body>
 </html>

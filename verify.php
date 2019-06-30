@@ -8,7 +8,7 @@
     <meta name="author" content="Team .EXE">
     <link rel="icon" href="exe.nith.ac.in/images/confess.png">
 
-    <title>Confession - Team .EXE</title>
+    <title>Anonymous Confessions</title>
     <style type="text/css">
 .demo-card {
   padding-top: 20px;
@@ -69,16 +69,17 @@
 ?> 
 <center>
 <div id="topp" class="page-header">
-<h1>NITH Confessions<small> - Team .EXE</small></h1>
+<h1>NITH Confessions</h1>
 Confession Verification page
 </div>
 <?php
   require_once('recaptchalib.php');
   require_once('secret.php');
-  include_once ('includes/sql_config.php');
-  $db=mysqli_connect(HOST, USER, PASSWORD, DATABASE)  or die('Error connecting to database');
+  require_once('recaptcha_keys.php');
+  $db=mysqli_connect($host, $username, $password, $database)  or die('Error connecting to database');
 
   //get the time of the confessions
+  date_default_timezone_set("Asia/Kolkata");
   $da=date("d/m/Y - H:i:s");
   //$timestamp = date('Y-m-d G:i:s');
   //$da = date_create();
@@ -96,50 +97,43 @@ Confession Verification page
         return $data;
     }
 
-  $resp = recaptcha_check_answer ($privatekey,
-                                $_SERVER["REMOTE_ADDR"],
-                                $_POST["recaptcha_challenge_field"],
-                                $_POST["recaptcha_response_field"]);
-
-  if (!$resp->is_valid) 
-  {
-    // What happens when the CAPTCHA was entered incorrectly
-    echo "Captcha entered is wrong<br>";
-    
-    die ("The reCAPTCHA wasn't entered correctly. Go back and try it again."."(reCAPTCHA said: ".$resp->error .")");
-  } 
-  else 
-  {
     // Your code here to handle a successful verification
     $message=mysqli_real_escape_string($db,$_POST["confmsg"]);
     $message=test_input($message);
+    $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret_key.'&response='.$_POST["g-recaptcha-response"]);
+    $responseData = json_decode($verifyResponse);
 
-    if($message)
+    if($responseData->success)
     {
-        $sql="INSERT INTO adminperm (message, cmnt, dat, permission) values ('$message','$cmt','$da',1)";
-        if(mysqli_query($db,$sql))
-        {
-            echo '<center><h2>Thanks for posting confession.</h2>';
-            echo '<a href="index.php">Check your confession here</a><br>We are redirecting you in 6 seconds.</center>';
-            header( "refresh:6;url=index.php" );
-        }
-        
-        else
-        {
-            echo "<center>Sorry sending failed<br>
-            Please do not use <b>'</b> in your messge, It is for secutiry of our server & databases.</center>";
+      if($message)
+      {
+          $sql="INSERT INTO adminperm (message, cmnt, date, permission) values ('$message','$cmt','$da',1)";
+          if(mysqli_query($db,$sql))
+          {
+              echo '<center><h2>Thanks for posting confession.</h2>';
+          }
+          
+          else
+          {
+              echo "<center>Sorry sending failed<br>
+              Please do not use <b>'</b> in your message, It is for security of our server & databases.</center>";
+          }
+      }
+      else
+          {
+                header( "refresh:5;url=makeConfess.php" );
+                echo "<center>You have to enter some message<br>
+                You're being redirected to previous page within 5 seconds<center>";
         }
     }
-    else
-        {
-              echo "<center>You have to enter some message<br>
-              You're being redirected to previous page within 5 seconds<center>";
-              header( "refresh:5;url=makeConfess.php" );
-        }
-  }
 
+    else{
+      header( "refresh:5;url=makeConfess.php" );
+      echo "<center> Recaptcha verification failed.<br>
+      You're being redirected to previous page within 5 seconds<center>";
+    }
       mysqli_close($db);
-  ?>
+?>
   </center>
 </body>
 </html>

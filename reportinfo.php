@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/makeconfess.css">
     <script type="text/javascript" src="tinymce/tinymce.min.js"></script>
         
-    <title>Report confession - Team .EXE</title>
+    <title>Report confession</title>
 
 <?php 
       include_once('stylesheets.php');
@@ -95,7 +95,7 @@
                     Enter confession id without #
                 </label>
                 <div class="input">
-                    <input class="inpf" name="confessionid" size="34" type="text" placeholder="" value="<?php echo $id?>">
+                    <input class="inpf" name="id" size="34" type="text" placeholder="">
                 </div>
                 <br>
                 <div class="input">
