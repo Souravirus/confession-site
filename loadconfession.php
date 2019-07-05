@@ -1,35 +1,18 @@
 <?php 
-    $limit=20;
-    $sql=mysqli_query($db,"select max(id) as id from adminperm");
-    while($row=mysqli_fetch_assoc($sql)){
-        $maxid=$row['id'];
+    if (isset($_GET['pageno'])){
+      $pageno = $_GET['pageno'];
+    } else{
+      $pageno = 1;
     }
-    $pages=ceil($maxid/$limit);
-    $page = min($pages, filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT, array(
-        'options' => array(
-            'default'   => 1,
-            'min_range' => 1,
-        ),
-    )));
-    $start=$maxid-(($page-1)*20);
-    if($start<20)
-        $end=1;
-    else{
-        $end=$start-19;
-    }
-    for($i=$start;$i>=$end;$i--)
-    {
-        $query="select * from adminperm where permission=1 && id=$i order by id desc";
-                $result=mysqli_query($db, $query);
-                $counter=-1;
-                if(!$result)die ("Database access failed:". mysql_error());
-                while($row=mysqli_fetch_array($result))
-                {
-                    ?>
-                    <?php 
-                        if($counter==-1)
-                        $counter=$row['id']
-                    ?>
+    $no_of_records_per_page=2;
+    $offset = ($pageno-1) * $no_of_records_per_page;
+    $result=mysqli_query($db,"select count(*) from adminperm");
+    $total_rows = mysqli_fetch_array($result)[0];
+    $total_pages = ceil($total_rows / $no_of_records_per_page);
+    $sql = "SELECT * FROM adminperm order by id desc LIMIT $offset, $no_of_records_per_page";
+    $result = mysqli_query($db, $sql);
+    while($row=mysqli_fetch_assoc($result)){
+?>
                     <div class="demo-card">
                         <div class="panel panel-info">
                             <div class="panel-heading">
@@ -49,27 +32,19 @@
                             </div>
                         </div>
                     </div>    
-                <?php       } 
-                        }
-
-                $prevlink = ($page > 1) ? ' <a href="?page=' . ($page - 1) . '" title="Previous page"><button class="btn btn-default">Previous Page</button></a>' : ' <span class="disabled"><button class="btn btn-default" disabled="disabled">Previous Page</button></span>';
-                $nextlink = ($page < $pages) ? '<a href="?page=' . ($page + 1) . '" title="Next page"><button class="btn btn-default">Next Page</button></a>' : '<span class="disabled"><button class="btn btn-default" disabled="disabled">Next Page</button></span>';
-                ?>
-                <div id="direction">
-                    <span class="dir" id="prev">
-                        <i class="fa fa-angle-double-left faa-passing-reverse animated" style="font-size:24px"></i>
-                        <?php echo $prevlink; ?>
-                    </span>
-                    <span class="dir" id="next">
-                        <?php echo $nextlink; ?>
-                        <i class="fa fa-angle-double-right faa-passing animated" style="font-size:24px"></i>
-                    </span>
-                </div>            
+<?php } ?>
+<div align="center">
+  <ul class="pagination ">
+          <li><a href="?pageno=1">First</a></li>
+          <li class="<?php if($pageno <= 1){ echo 'disabled'; } ?>">
+              <a href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>">Prev</a>
+          </li>
+          <li class="<?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
+              <a href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>">Next</a>
+          </li>
+          <li><a href="?pageno=<?php echo $total_pages; ?>">Last</a></li>
+      </ul>
+</div>
                 <?php
-                mysqli_close($db);
+                  mysqli_close($db);
                 ?>
-
-
-
-
-  
