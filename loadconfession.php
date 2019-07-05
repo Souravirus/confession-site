@@ -4,7 +4,7 @@
     } else{
       $pageno = 1;
     }
-    $no_of_records_per_page=2;
+    $no_of_records_per_page=10;
     $offset = ($pageno-1) * $no_of_records_per_page;
     $result=mysqli_query($db,"select count(*) from adminperm");
     $total_rows = mysqli_fetch_array($result)[0];
