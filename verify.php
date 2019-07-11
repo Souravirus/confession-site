@@ -100,7 +100,7 @@ Confession Verification page
     // Your code here to handle a successful verification
     $message=mysqli_real_escape_string($db,$_POST["confmsg"]);
     $message=test_input($message);
-    $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret_key.'&response='.$_POST["g-recaptcha-response"]);
+    $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret_key.'&response='.$_POST["response"]);
     $responseData = json_decode($verifyResponse);
 
     if($responseData->success)

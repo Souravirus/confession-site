@@ -8,6 +8,7 @@
     <link rel="icon" href="exe.nith.ac.in/images/confess.png">
     <link rel="stylesheet" href="css/makeconfess.css">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="/jquery/jquery-3.2.0.min.js"></script>
     <script type="text/javascript" src="tinymce/tinymce.min.js"></script>
     <script>
              tinymce.init({
@@ -59,7 +60,7 @@
         <h1>Confess here</h1>
           </div>
             <div id="main1"> 
-                <form action="verify.php" method="POST" >
+                <form class="recaptchaForm" method="POST" >
                     <div class="input">
                         <textarea class="inpf" name="confmsg" rows="10" cols="10">
                         </textarea>
@@ -73,6 +74,20 @@
         <?php
     include_once('footer.php');
 ?>
+      <script>
+        $(document).ready(function(){
+          $(".recaptchaForm").on('submit', function(event){
+            var recaptcha = $('#g-recaptcha-response').val();
+            if(recaptcha===""){
+              event.preventDefault();
+              alert("Please check Recaptcha");
+            }
+            $.post("verify.php", {
+              "response": recaptcha
+            });
+          });
+        });
+      </script>
 
     </body>
 </html>
